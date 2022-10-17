@@ -1,22 +1,27 @@
+#include "ft_printf.h"
 
-
-void    wall_happen(va_list args, char happen)
+int    wall_happen(va_list *args, char happen)
 {
-    int count;
-
-    count = 0;
-    if (happen == 'd')
-        count += write(1, ft_itoa(...), ft_strlen(ft_itoa(...)) + 1);
+    if (happen == 'd' || happen == 'i')
+        return (ft_putnbr(va_arg(*args, int)));
     else if (happen == 'c')
-        count += write(1, ..., 2);
+        return (ft_putchar(va_arg(*args, int))); 
     else if (happen == 's')
-        count += write(1, s++, 1);
-    else if (happen == 'p')
-        count += ft_putnbr_base(..., 16);///HAY QUE PONER LO DE 0X
-    return (count);
+        return (ft_putstr(va_arg(*args, const char *)));
+    else if (happen == 'p') ///LO TENGO QUE HACER YOYOOOOOOOOOOOOO
+        return (ft_putnbr_base((unsigned long)va_arg(*args, void *), "0123456789abcdef"));///HAY QUE PONER LO DE 0X iuxx%
+    else if (happen == 'u')
+        return (ft_putnbr_base(va_arg(*args, unsigned int), "0123456789"));
+    else if (happen == 'x')
+		return (ft_putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef"));
+	else if (happen == 'X')
+		return (ft_putnbr_base (va_arg(*args, unsigned int), "0123456789ABCDEF"));
+	else if (happen == '%')
+		return (ft_putchar('%'));
+    return(0);
 }
 
-int    ft_printf(char *s, ...)
+int    ft_printf(const char *s, ...)
 {
     va_list args;
     int l;
@@ -30,7 +35,7 @@ int    ft_printf(char *s, ...)
     l = ft_strlen(s);
     while(*s)
         if (*(s++) == '%')
-            countch += whall_happen(args, *s);
+            countch += wall_happen(args, *s);
     else 
         countch += write(1, s-l, l + 1);
     return (countch);
