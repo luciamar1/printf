@@ -22,10 +22,10 @@ int	good(char *base)
 	return (1);
 }
 
-void	ft_putnbr_base(int nb, char *base)
+int	ft_putnbr_base(int nb, char *base)
 {
 	unsigned int	n;
-	int				l;
+	unsigned int	l;
 
 	l = ft_strlen(base);
 	n = nb;
@@ -39,7 +39,7 @@ void	ft_putnbr_base(int nb, char *base)
 		if (n > l)
 			ft_putnbr_base(n / l, base);
 	}
-	put_char(base[n % l]);
+	ft_putchar(base[n % l]);
 	return(1);
 }
 

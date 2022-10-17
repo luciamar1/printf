@@ -1,14 +1,14 @@
 #include "ft_printf.h"
 
-void    put_char(char a)
+int     ft_putchar(char a)
 {
         write(1, &a, 1);
         return (1);
 }
 
-size_t  ft_strlen(const char *s)
+int  ft_strlen(const char *s)
 {
-        size_t  l;
+        int  l;
 
         l = 0;
         while (s[l])
@@ -16,7 +16,7 @@ size_t  ft_strlen(const char *s)
         return (l);
 }
 
-void    ft_putnbr(int nb)
+int     ft_putnbr(int nb)
 {
         long int        n;
 
@@ -28,15 +28,17 @@ void    ft_putnbr(int nb)
         }
         if (n > 9)
                 ft_putnbr((n / 10));
-        put_char('0' + n % 10);
+        ft_putchar('0' + n % 10);
+        if (nb < 0)
+                return(2);
     return(1);
 }
 
-void    ft_putstr(char *s)
+int     ft_putstr(const char *s)
 {
     int l;
     if (!s)
-        return ((void) NULL);
+        return (0);
     l = 0;
     while (*s)
     {

@@ -1,6 +1,7 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
-int    wall_happen(va_list *args, char happen)
+int ft_whall_happen(va_list *args, char happen)
 {
     if (happen == 'd' || happen == 'i')
         return (ft_putnbr(va_arg(*args, int)));
@@ -21,22 +22,30 @@ int    wall_happen(va_list *args, char happen)
     return(0);
 }
 
-int    ft_printf(const char *s, ...)
+int    ft_printf(char const *s, ...)
 {
     va_list args;
-    int l;
     int countch;
 
     countch = 0;
-    l = 0;
     va_start(args, s);
     if (!s)
         write(1, "ERROR", 6);
-    l = ft_strlen(s);
     while(*s)
-        if (*(s++) == '%')
-            countch += wall_happen(args, *s);
-    else 
-        countch += write(1, s-l, l + 1);
+    {
+        if (*(s) == '%')
+        {
+            countch += ft_whall_happen(&args, s[1]);
+            s++;
+        }
+        else 
+        {
+            write(1, s, 1);
+            countch ++;
+        }
+        if(*s)
+            s++;
+    }
+    //printf("count = %d\n", countch);
     return (countch);
 }

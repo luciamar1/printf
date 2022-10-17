@@ -1,5 +1,5 @@
 NAME = libftprintf.a
-SRC = ft_printf.c csdu.c xp.c
+SRC = ft_printf.c putnbr_base.c utils.c
 FLAGS = -Wall -Wextra -Werror
 RM = /bin/rm -f
 OBJ = $(SRC:.c=.o)
