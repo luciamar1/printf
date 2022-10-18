@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
 int     ft_putchar(char a)
 {
@@ -38,7 +39,10 @@ int     ft_putstr(const char *s)
 {
     int l;
     if (!s)
-        return (0);
+    {
+        write(1, "(null)", 6);
+        return(6);
+    }
     l = 0;
     while (*s)
     {

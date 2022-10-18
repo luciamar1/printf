@@ -3,5 +3,5 @@
 
 int	main(void)
 {
-	printf("%ld", write(1, "hola", 5));
+	printf("%d", write(1, "0x", 3));
 }

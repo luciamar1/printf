@@ -10,7 +10,7 @@ int ft_whall_happen(va_list *args, char happen)
     else if (happen == 's')
         return (ft_putstr(va_arg(*args, const char *)));
     else if (happen == 'p') ///LO TENGO QUE HACER YOYOOOOOOOOOOOOO
-        return (ft_putnbr_base((unsigned long)va_arg(*args, void *), "0123456789abcdef"));///HAY QUE PONER LO DE 0X iuxx%
+        return (ft_putptr_base((unsigned long long)(va_arg(*args, void *)), "0123456789abcdef", 'p'));///HAY QUE PONER LO DE 0X iuxx%
     else if (happen == 'u')
         return (ft_putnbr_base(va_arg(*args, unsigned int), "0123456789"));
     else if (happen == 'x')
@@ -33,7 +33,7 @@ int    ft_printf(char const *s, ...)
         write(1, "ERROR", 6);
     while(*s)
     {
-        if (*(s) == '%')
+        if (*s == '%')
         {
             countch += ft_whall_happen(&args, s[1]);
             s++;
