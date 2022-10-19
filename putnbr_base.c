@@ -1,5 +1,6 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
 
 int	good(char *base)
 {
@@ -37,7 +38,7 @@ int	ft_putnbr_base(int nb, char *base)
 			write(1, "-", 1);
 			n *= -1;
 		}
-		if (nb > (l))
+		if (nb >= (l))
 			ft_putnbr_base(n / l, base);
 	}
 	ft_putchar(base[n % l]);
@@ -52,14 +53,15 @@ int	ft_putptr_base(unsigned long long nb, char *base, char p)
 	counter = 0;
 	l = ft_strlen(base);
 	if (p)
-		counter += (1 + write(1, "0x", 2));
+		write(1, "0x", 2);
+	//printf("contador = %d\n", counter);
 	if ((good(base) != 0) || (l != 0 || l != 1))
 	{
-		if (nb > ((unsigned long long) l - 1))
+		if (nb >= ((unsigned long long) l))
 			counter = ft_putptr_base(nb / l, base, 0);
 	}
 	counter++;
 	ft_putchar(base[nb % l]);
-	//printf("%d", counter);
+	//printf("%d\n", counter);
 	return(counter);
 }

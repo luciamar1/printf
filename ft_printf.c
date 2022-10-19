@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <limits.h>
+
 
 int ft_whall_happen(va_list *args, char happen)
 {
@@ -10,13 +12,13 @@ int ft_whall_happen(va_list *args, char happen)
     else if (happen == 's')
         return (ft_putstr(va_arg(*args, const char *)));
     else if (happen == 'p') ///LO TENGO QUE HACER YOYOOOOOOOOOOOOO
-        return (ft_putptr_base((unsigned long long)(va_arg(*args, void *)), "0123456789abcdef", 'p'));///HAY QUE PONER LO DE 0X iuxx%
+        return (ft_putptr_base((unsigned long long)(va_arg(*args, void *)), "0123456789abcdef", 'p') + 3);///HAY QUE PONER LO DE 0X iuxx%
     else if (happen == 'u')
-        return (ft_putnbr_base(va_arg(*args, unsigned int), "0123456789"));
+        return (ft_putptr_base(va_arg(*args, unsigned int), "0123456789", 0));
     else if (happen == 'x')
-		return (ft_putnbr_base(va_arg(*args, unsigned int), "0123456789abcdef"));
+		return (ft_putptr_base(va_arg(*args, unsigned int), "0123456789abcdef",0));
 	else if (happen == 'X')
-		return (ft_putnbr_base (va_arg(*args, unsigned int), "0123456789ABCDEF"));
+		return (ft_putptr_base (va_arg(*args, unsigned int), "0123456789ABCDEF"));
 	else if (happen == '%')
 		return (ft_putchar('%'));
     return(0);
